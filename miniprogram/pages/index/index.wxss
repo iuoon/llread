@@ -3,9 +3,6 @@ page{
   background: #f5f5f5;  
   /* 避免左侧Item不够时 被白色覆盖*/
 }
-.testv{
-  height:50px;
-}
 /* 2.主盒子 */  
 .container { 
   width: 100%;             /* 宽度占屏幕的100% */
@@ -17,16 +14,16 @@ page{
  /* 3.1. 左侧栏主盒子总体设置 */  
 .nav_left{  
   position:absolute;    /* 使用绝对定位 */
-  top:50px;              /* 距离上边距：0px */
+  top:0px;              /* 距离上边距：0px */
   left:0px;             /* 距离左边距：0px */
-  width: 25%;           /* 每个item所占的宽度 */
+  width: 15%;           /* 每个item所占的宽度 */
   background: #f5f5f5;  /* 主盒子设置背景色为灰色 */  
   text-align: center;   /* 文字居中显示 */
 }
 
 /* 3.2. 左侧栏的每个item */  
 .nav_left .nav_left_items{  
-  height: 40px;      /* 每个item高40px*/  
+  height: 80px;      /* 每个item高40px*/  
   padding: 6px 0;    /* 上内边距和下内边距是 6px[增加高度]  右内边距和左内边距是 0px*/
   border-bottom: 1px solid #dedede;   /* 设置下边线 */  
   font-size: 14px;   /* 设置文字大小：14px */ 
@@ -34,9 +31,9 @@ page{
 
 /* 3.3. 左侧栏list的item被选中时*/  
 .nav_left .nav_left_items.active{ 
-  background: #fff;  /* 背景色变成白色 */  
-  color: #3385ff;    /* 字体编程蓝色 */
-  border-left: 3px solid #3385ff;  /* 设置边框的宽度以及颜色 */
+ /* background: #fff;  /* 背景色变成白色 */  
+ /* color: #3385ff;    /* 字体编程蓝色 */
+ /* border-left: 3px solid #3385ff;  /* 设置边框的宽度以及颜色 */
 }
 /* 4.右盒子 */  
 
@@ -44,9 +41,9 @@ page{
 .nav_right{  
   position: absolute;   /* 使用绝对定位 */  
   top: 50;         /* 距离上边距：0px */
-  left: 80px;     /* 距离左边距：80px */
-  width: 75%;     /* 右侧主盒子所占宽度 */
-  height: 600px;  /* 右侧主盒子所占高度 */
+  left: 50px;     /* 距离左边距：80px */
+  width: 85%;     /* 右侧主盒子所占宽度 */
+  height: 500px;  /* 右侧主盒子所占高度 */
   padding: 10px;  /* 所有 4 个内边距都是 10px*/
   box-sizing: border-box;  /* 为元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制*/
   background: #fff;        /* 右侧主盒子背景颜色 */
@@ -55,15 +52,87 @@ page{
 /* 4.2. 右侧栏中的每个item */  
 .nav_right .nav_right_items{  
   float: left;          /* 浮动向左 */  
-  width: 33.33%;        /* 每个item设置宽度是33.33% */  
-  height: 120px;        /* 每个item设置高度是120px */ 
+  width: 50%;        /* 每个item设置宽度是33.33% 设置一行展示几个，33.33显示3个，50显示两个 100显示1个*/  
+  height: 130px;        /* 每个item设置高度是120px */ 
   text-align: center;   /* 设置图片下方的提示文字居中显示 */
 }  
 
 /* 4.3. 右侧栏中的每个item的图样式设置 */  
 .nav_right .nav_right_items image{  
-  width: 60px;         /* 给图片设置宽度 */  
-  height: 60px;        /* 给图片设置高度 */  
+  width: 160px;         /* 给图片设置宽度 */  
+  height: 120px;        /* 给图片设置高度 */  
   margin-top: 15px;    /* 图片距离上边距15px */  
   border-radius: 40%;  /* 给图片添加圆角边框 */
 }  
+
+
+.logobg{
+  width: 105px;
+  height: 40px;
+
+}
+.title .logov{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-left:70px;
+}
+
+.logov image{
+    width: 155px;
+    height: 60px;
+    z-index: 1;
+}
+.logov .logo-text{
+    position: absolute;
+    z-index: 99;
+    text-align: center;
+    margin-top:12px;
+    color: red;
+}
+.logo-text{
+  font-size: 70rpx;
+  color: red;
+  font-family: '楷体';
+  font-weight: 800;
+
+}
+
+.title .catalog{
+  font-size: 30rpx;
+  color: green;
+  font-family: '宋体';
+  padding-left:40px;
+
+}
+
+.title{
+  display: flex;
+  align-items: center;
+
+}
+
+.content{
+  background-color: #e7f1f4;
+  width: 160px;height:120px; 
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+.qrcode{
+  position: absolute;
+  height: 500px
+}
+
+.qrcode1{
+  width: 72px;
+  height: 72px;
+}
+
+.qrcode2{
+  width: 72px;
+  height: 72px;
+}
