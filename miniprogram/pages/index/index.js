@@ -1,120 +1,131 @@
-//index.js
-const app = getApp()
-
+// pages/index/index.js
 Page({
   data: {
-    avatarUrl: './user-unlogin.png',
-    userInfo: {},
-    logged: false,
-    takeSession: false,
-    requestResult: ''
-  },
-
-  onLoad: function() {
-    if (!wx.cloud) {
-      wx.redirectTo({
-        url: '../chooseLib/chooseLib',
-      })
-      return
-    }
-
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              this.setData({
-                avatarUrl: res.userInfo.avatarUrl,
-                userInfo: res.userInfo
-              })
+    cateItems: [
+      {
+        cate_id: 1,
+        cate_name: "水果",
+        ishaveChild: true,
+        children:
+          [
+            {
+              child_id: 1,
+              name: '樱桃',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t15613/296/2281640440/392160/6e019064/5a9a450dNa47bf95f.jpg!q50.jpg"
+            },
+            {
+              child_id: 2,
+              name: '樱桃',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t15613/296/2281640440/392160/6e019064/5a9a450dNa47bf95f.jpg!q50.jpg"
+            },
+            {
+              child_id: 3,
+              name: '樱桃',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t15613/296/2281640440/392160/6e019064/5a9a450dNa47bf95f.jpg!q50.jpg"
+            },
+            {
+              child_id: 4,
+              name: '樱桃',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t15613/296/2281640440/392160/6e019064/5a9a450dNa47bf95f.jpg!q50.jpg"
             }
-          })
-        }
-      }
-    })
-  },
-
-  onGetUserInfo: function(e) {
-    if (!this.logged && e.detail.userInfo) {
-      this.setData({
-        logged: true,
-        avatarUrl: e.detail.userInfo.avatarUrl,
-        userInfo: e.detail.userInfo
-      })
-    }
-  },
-
-  onGetOpenid: function() {
-    // 调用云函数
-    wx.cloud.callFunction({
-      name: 'login',
-      data: {},
-      success: res => {
-        console.log('[云函数] [login] user openid: ', res.result.openid)
-        app.globalData.openid = res.result.openid
-        wx.navigateTo({
-          url: '../userConsole/userConsole',
-        })
+          ]
       },
-      fail: err => {
-        console.error('[云函数] [login] 调用失败', err)
-        wx.navigateTo({
-          url: '../deployFunctions/deployFunctions',
-        })
-      }
-    })
-  },
-
-  // 上传图片
-  doUpload: function () {
-    // 选择图片
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-
-        wx.showLoading({
-          title: '上传中',
-        })
-
-        const filePath = res.tempFilePaths[0]
-        
-        // 上传图片
-        const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
-        wx.cloud.uploadFile({
-          cloudPath,
-          filePath,
-          success: res => {
-            console.log('[上传文件] 成功：', res)
-
-            app.globalData.fileID = res.fileID
-            app.globalData.cloudPath = cloudPath
-            app.globalData.imagePath = filePath
-            
-            wx.navigateTo({
-              url: '../storageConsole/storageConsole'
-            })
-          },
-          fail: e => {
-            console.error('[上传文件] 失败：', e)
-            wx.showToast({
-              icon: 'none',
-              title: '上传失败',
-            })
-          },
-          complete: () => {
-            wx.hideLoading()
-          }
-        })
-
+      {
+        cate_id: 2,
+        cate_name: "干果",
+        ishaveChild: true,
+        children:
+          [
+            {
+              child_id: 1,
+              name: '夏威夷果',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t18901/57/1522219067/198105/1f4ad39/5acaccb2Nf4a6792b.jpg!q50.jpg"
+            },
+            {
+              child_id: 2,
+              name: '夏威夷果',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t18901/57/1522219067/198105/1f4ad39/5acaccb2Nf4a6792b.jpg!q50.jpg"
+            },
+            {
+              child_id: 3,
+              name: '夏威夷果',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t18901/57/1522219067/198105/1f4ad39/5acaccb2Nf4a6792b.jpg!q50.jpg"
+            },
+            {
+              child_id: 4,
+              name: '夏威夷果',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t18901/57/1522219067/198105/1f4ad39/5acaccb2Nf4a6792b.jpg!q50.jpg"
+            },
+            {
+              child_id: 5,
+              name: '夏威夷果',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t18901/57/1522219067/198105/1f4ad39/5acaccb2Nf4a6792b.jpg!q50.jpg"
+            },
+            {
+              child_id: 6,
+              name: '夏威夷果',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t18901/57/1522219067/198105/1f4ad39/5acaccb2Nf4a6792b.jpg!q50.jpg"
+            },
+            {
+              child_id: 7,
+              name: '夏威夷果',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t18901/57/1522219067/198105/1f4ad39/5acaccb2Nf4a6792b.jpg!q50.jpg"
+            },
+            {
+              child_id: 8,
+              name: '夏威夷果',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t18901/57/1522219067/198105/1f4ad39/5acaccb2Nf4a6792b.jpg!q50.jpg"
+            }
+          ]
       },
-      fail: e => {
-        console.error(e)
+      {
+        cate_id: 3,
+        cate_name: "蔬菜",
+        ishaveChild: true,
+        children:
+          [
+            {
+              child_id: 1,
+              name: '有机上海青',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t2827/290/2563889921/292001/bf218791/576b843eN1f7e4b44.jpg!q50.jpg"
+            },
+            {
+              child_id: 2,
+              name: '有机上海青',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t2827/290/2563889921/292001/bf218791/576b843eN1f7e4b44.jpg!q50.jpg"
+            },
+            {
+              child_id: 3,
+              name: '有机上海青',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t2827/290/2563889921/292001/bf218791/576b843eN1f7e4b44.jpg!q50.jpg"
+            },
+            {
+              child_id: 4,
+              name: '有机上海青',
+              image: "https://m.360buyimg.com/mobilecms/s357x357_jfs/t2827/290/2563889921/292001/bf218791/576b843eN1f7e4b44.jpg!q50.jpg"
+            }
+          ]
+      },
+      {
+        cate_id: 4,
+        cate_name: "海鲜",
+        ishaveChild: false,
+        children: []
       }
-    })
+    ],
+    curNav: 1,
+    curIndex: 0
   },
 
+  //事件处理函数  
+  switchRightTab: function (e) {
+    // 获取item项的id，和数组的下标值  
+    let id = e.target.dataset.id,
+      index = parseInt(e.target.dataset.index);
+    // 把点击到的某一项，设为当前index  
+    this.setData({
+      curNav: id,
+      curIndex: index
+    })
+  }
 })
